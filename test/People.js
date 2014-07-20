@@ -26,7 +26,9 @@ describe("#People", function () {
     var level = require('level-test')();
     db = level(env+'.db');
 
-    graphs = require('../')(db);
+    graphs = require('../')(db, {
+      base: "http://open.app/",
+    });
 
     graphs.set(
       require('../lib/People')
