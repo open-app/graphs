@@ -4,17 +4,17 @@ var Map = require('es6-map');
 
 var Graph = require('oa-graph');
 
-function Graphs (db) {
-  debug("constructor", db);
+function Graphs (db, options) {
+  debug("constructor", db, options);
   // call new constructor if not already
   if (!(this instanceof Graphs)) {
-    return new Graphs(db);
+    return new Graphs(db, options);
   }
 
   // save graph db
   this.db = require('levelgraph-jsonld')(
-    require('levelgraph')(db)
-  );
+    require('levelgraph')(db, options)
+  , options);
   
   // call Map constructor on this
   Map.call(this);
