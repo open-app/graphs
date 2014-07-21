@@ -31,10 +31,9 @@ describe("#People", function () {
       base: "http://open.app/",
     });
 
-    graphs.set(
+    People = graphs.use(
       require('../lib/People')
     );
-    People = graphs.get('People');
   })
 
   beforeEach(function (done) {

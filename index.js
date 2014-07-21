@@ -21,16 +21,10 @@ function Graphs (options) {
   
   // call Map constructor on this
   Map.call(this);
-
-  // save Map.set
-  this.__set = this.set;
-  // and use our set function
-  this.set = this._set;
-  delete this._set;
 }
 inherits(Graphs, Map);
 
-Graphs.prototype._set = function (graph) {
+Graphs.prototype.use = function (graph) {
   debug("set", graph);
 
   // if not instanceof Graph, assume it is type
@@ -43,7 +37,9 @@ Graphs.prototype._set = function (graph) {
     });
   }
 
-  return this.__set(graph.name, graph);
+  this.set(graph.name, graph);
+
+  return graph;
 };
 
 module.exports = Graphs;
