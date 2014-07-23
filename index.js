@@ -18,6 +18,13 @@ function Graphs (options) {
   this.db = require('levelgraph-jsonld')(
     require('levelgraph')(level, options)
   , options);
+
+  // setup type registry
+  if (options.types) {
+    this.types = options.types;
+  } else {
+    this.types = require('oa-types')();
+  }
   
   // call Map constructor on this
   Map.call(this);
