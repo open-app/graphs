@@ -11,10 +11,10 @@ function Graphs (options) {
     return new Graphs(options);
   }
 
+  // setup graph db
   var level = options.db;
   delete options.db;
 
-  // save graph db
   this.db = require('levelgraph-jsonld')(
     require('levelgraph')(level, options)
   , options);
