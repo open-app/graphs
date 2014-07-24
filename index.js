@@ -11,6 +11,9 @@ function Graphs (options) {
     return new Graphs(options);
   }
 
+  // call Map constructor on this
+  Map.call(this);
+
   // setup graph db
   var level = options.db;
   delete options.db;
@@ -25,9 +28,6 @@ function Graphs (options) {
   } else {
     this.types = require('oa-types')();
   }
-  
-  // call Map constructor on this
-  Map.call(this);
 }
 inherits(Graphs, Map);
 
