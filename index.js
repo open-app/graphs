@@ -28,6 +28,14 @@ function Graphs (options) {
   } else {
     this.types = require('oa-types')();
   }
+
+  // use any given graphs
+  if (options.graphs) {
+    for (var name in options.graphs) {
+      debug("use-ing", options.graphs[name]);
+      this.use(options.graphs[name]);
+    }
+  }
 }
 inherits(Graphs, Map);
 
