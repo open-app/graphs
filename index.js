@@ -32,7 +32,7 @@ function Graphs (options) {
 inherits(Graphs, Map);
 
 Graphs.prototype.use = function (graph) {
-  debug("set", graph);
+  debug("use", graph);
 
   // if not instanceof Graph, assume it is type
   if (!(graph instanceof Graph)) {
