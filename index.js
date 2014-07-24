@@ -44,6 +44,7 @@ Graphs.prototype.use = function (graph) {
     });
   }
 
+  debug("set", graph.name, graph);
   this.set(graph.name, graph);
 
   return graph;
