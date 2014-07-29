@@ -5,6 +5,7 @@ var Map = require('es6-map');
 var Graph = require('oa-graph');
 
 function Graphs (options) {
+  options = options || {};
   debug("constructor", options);
   // call new constructor if not already
   if (!(this instanceof Graphs)) {
