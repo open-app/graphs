@@ -32,9 +32,9 @@ function Graphs (options) {
 
   // use any given graphs
   if (options.graphs) {
-    for (var name in options.graphs) {
-      debug("use-ing", options.graphs[name]);
-      this.use(options.graphs[name]);
+    for (var id in options.graphs) {
+      debug("use-ing", options.graphs[id]);
+      this.use(options.graphs[id]);
     }
   }
 }
@@ -49,12 +49,12 @@ Graphs.prototype.use = function (graph) {
       db: graph.db || this.db,
       types: graph.types || this.types,
       type: graph.type,
-      name: graph.name,
+      id: graph.id,
     });
   }
 
-  debug("set", graph.name, graph);
-  this.set(graph.name, graph);
+  debug("set", graph.id, graph);
+  this.set(graph.id, graph);
 
   return graph;
 };
