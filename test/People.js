@@ -89,5 +89,9 @@ describe("#People", function () {
     })
     ;
   });
+
+  after(function (done) {
+    db.close(done)
+  });
 });
 
