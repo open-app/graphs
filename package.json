@@ -26,6 +26,7 @@
     "oa-graph": "git://github.com/open-app/graph"
   },
   "devDependencies": {
+    "bluebird": "^2.2.2",
     "chai": "^1.9.1",
     "jjv": "^1.0.0",
     "level-delete-stream": "0.0.1",

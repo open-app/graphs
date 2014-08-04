@@ -3,8 +3,9 @@ var env = process.env.NODE_ENV || 'test';
 var expect = require('chai').expect;
 var _ = require('lodash');
 var deleteStream = require('level-delete-stream');
+var Promise = require('bluebird');
 
-var people = [{
+var musketeers = [{
   name: "Athos",
 }, {
   name: "Aramis",
@@ -36,9 +37,11 @@ var checkPerson = function (actual, expected) {
   });
 };
 
-describe("#People", function () {
+describe("#Groups", function () {
   var db;
   var graphs;
+  var Groups;
+  var Memberships;
   var People;
 
   before(function () {
@@ -49,12 +52,13 @@ describe("#People", function () {
     graphs = require('../')({
       db: db,
       base: "http://open.app/",
+      graphs: require('../lib'),
     });
 
-    Groups = graphs.use(
-      require('../lib/Groups')
-    );
-  })
+    People = graphs.get('People');
+    Groups = graphs.get('Groups');
+    Memberships = graphs.get('Memberships');
+  });
 
   beforeEach(function (done) {
     return db.createKeyStream()
@@ -105,6 +109,45 @@ describe("#People", function () {
     })
     .then(function (destroyedGroup) {
       expect(destroyedGroup).to.not.exist;
+    })
+    ;
+  });
+
+  it("should create group and add members", function () {
+    var fixture = _.clone(threeMusketeers);
+    var id;
+    // create new group
+    return Groups.create(fixture)
+    .then(function (savedGroup) {
+      id = savedGroup['@id'];
+    })
+    .then(function () {
+      // create people
+      return Promise.all(musketeers.map(function (person) {
+        return People.create(person);
+      }));
+    })
+    .then(function (people) {
+      // add people as members to group
+      return Promise.all(people.map(function (person) {
+        return Memberships.create({
+          group: id,
+          member: person['@id'],
+        });
+      }));
+    })
+    .then(function (memberships) {
+      console.log("MEMBERSHIPS", memberships);
+
+      // get group again
+      return Groups.get(id);
+    })
+    .then(function (group) {
+      console.log("GROUP", group);
+      // group should contain memberships
+      expect(group).to.have.property('memberships');
+      // memberships should contain people
+      expect(group.memberships).to.have.length(3);
     })
     ;
   });
