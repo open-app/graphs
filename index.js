@@ -50,6 +50,7 @@ Graphs.prototype.use = function (graph) {
       types: graph.types || this.types,
       type: graph.type,
       id: graph.id,
+      graphs: this,
     });
   }
 
