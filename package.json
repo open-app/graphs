@@ -23,7 +23,8 @@
     "inherits": "^2.0.1",
     "levelgraph": "^0.8.2",
     "levelgraph-jsonld": "^0.3.1",
-    "oa-graph": "git://github.com/open-app/graph"
+    "oa-graph": "git://github.com/open-app/graph",
+    "oa-types": "git://github.com/open-app/types"
   },
   "devDependencies": {
     "bluebird": "^2.2.2",
